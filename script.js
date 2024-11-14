@@ -2,6 +2,16 @@ const container = document.querySelector(".container");
 const button = document.querySelector(".user-prompt");
 let grid = document.querySelectorAll(".container > div");
 
+function getRandomColor() {
+  const randomBetween = (min, max) =>
+    min + Math.floor(Math.random() * (max - min + 1));
+  const r = randomBetween(0, 255);
+  const g = randomBetween(0, 255);
+  const b = randomBetween(0, 255);
+  const rgb = `rgb(${r},${g},${b})`;
+  return rgb;
+}
+
 function generateGrid(gridSize) {
   for (let i = 0; i < gridSize; i++) {
     for (let j = 0; j < gridSize; j++) {
@@ -13,9 +23,12 @@ function generateGrid(gridSize) {
   }
 
   grid = document.querySelectorAll(".container > div");
+  let opacity = 0;
   grid.forEach((square) => {
+    opacity += 0.1;
     square.addEventListener("mouseover", () => {
-      square.style.backgroundColor = "black";
+      square.style.backgroundColor = getRandomColor();
+      square.style.opacity = opacity;
     });
     square.addEventListener("mouseout", () => {
       square.style.backgroundColor = "white";
